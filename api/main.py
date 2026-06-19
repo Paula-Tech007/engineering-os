@@ -1,6 +1,9 @@
 from datetime import datetime
+from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Query
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text, or_
 from sqlalchemy.orm import Session
 
@@ -83,6 +86,17 @@ else:
 app = FastAPI(
     title="Engineering OS API",
     version="1.0.0"
+)
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+WEB_DIR = BASE_DIR / "web"
+DASHBOARD_FILE = WEB_DIR / "dashboard.html"
+DASHBOARD_ASSETS_DIR = WEB_DIR / "assets"
+
+app.mount(
+    "/dashboard-assets",
+    StaticFiles(directory=DASHBOARD_ASSETS_DIR),
+    name="dashboard-assets"
 )
 
 
@@ -278,6 +292,11 @@ def health_check():
 # ==========================================================
 # DASHBOARD SUMMARY
 # ==========================================================
+
+@app.get("/dashboard", tags=["Dashboards"], response_class=HTMLResponse)
+def dashboard_ui():
+    return DASHBOARD_FILE.read_text(encoding="utf-8")
+
 
 @app.get("/dashboard/summary", tags=["Dashboards"])
 def dashboard_summary():

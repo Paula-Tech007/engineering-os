@@ -26,6 +26,7 @@ O Engineering OS organiza projetos, APIs, agentes, workflows, componentes, promp
 - API FastAPI para governanca, catalogo, inventario e descoberta de ativos.
 - CRUD de projetos, ativos, agentes, workflows, componentes, prompts, metricas, dashboards e artigos de conhecimento.
 - CRUD de relacionamentos entre ativos e entidades do catalogo.
+- Dashboard web servido pela propria API.
 - Inventario consolidado e inventario por projeto.
 - Busca global por texto.
 - Consulta de relacionamentos por ativo.
@@ -82,6 +83,7 @@ A API fica em `api/` e expoe o contrato principal do MVP.
 | Dashboards | `/dashboards` |
 | Conhecimento | `/knowledge` |
 | Relacionamentos | `/relationships` |
+| Dashboard web | `GET /dashboard` |
 | Inventario consolidado | `GET /inventory` |
 | Inventario por projeto | `GET /projects/{project_id}/inventory` |
 | Relacionamentos por ativo | `GET /assets/{asset_id}/relationships` |
@@ -121,6 +123,7 @@ api\venv\Scripts\python.exe -m uvicorn api.main:app --reload
 Depois acesse:
 
 - API: `http://127.0.0.1:8000`
+- Dashboard web: `http://127.0.0.1:8000/dashboard`
 - Swagger UI: `http://127.0.0.1:8000/docs`
 - OpenAPI JSON: `http://127.0.0.1:8000/openapi.json`
 

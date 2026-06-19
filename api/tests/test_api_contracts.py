@@ -4,7 +4,7 @@ import unittest
 
 from pydantic import ValidationError
 
-from api.main import app, home
+from api.main import app, dashboard_ui, home
 from api.response_utils import list_response, success_response
 from api.schemas import AssetCreate, AssetRelationshipCreate, ProjectCreate
 
@@ -15,6 +15,7 @@ class ApiContractTests(unittest.TestCase):
 
         self.assertIn("/", route_paths)
         self.assertIn("/health", route_paths)
+        self.assertIn("/dashboard", route_paths)
         self.assertIn("/projects", route_paths)
         self.assertIn("/assets", route_paths)
         self.assertIn("/relationships", route_paths)
@@ -59,6 +60,13 @@ class ApiContractTests(unittest.TestCase):
                 },
             ),
         )
+
+    def test_dashboard_ui_is_served(self):
+        html = dashboard_ui()
+
+        self.assertIn("Engineering OS", html)
+        self.assertIn("/dashboard-assets/dashboard.css", html)
+        self.assertIn("/dashboard-assets/dashboard.js", html)
 
     def test_list_response_contract(self):
         self.assertEqual(

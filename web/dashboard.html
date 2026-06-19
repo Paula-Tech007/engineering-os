@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Engineering OS Dashboard</title>
+    <link rel="stylesheet" href="/dashboard-assets/dashboard.css">
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Engineering OS</p>
+        <h1>Governance Dashboard</h1>
+      </div>
+      <div class="status-cluster" aria-live="polite">
+        <span id="apiStatus" class="status-pill">API</span>
+        <span id="dataStatus" class="status-pill muted">Dados</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="summary-grid" aria-label="Resumo do catalogo">
+        <article class="metric-card emphasis">
+          <span>Itens catalogados</span>
+          <strong id="totalCatalogItems">0</strong>
+          <small id="coverageLabel">Cobertura aguardando dados</small>
+        </article>
+        <article class="metric-card">
+          <span>Projetos</span>
+          <strong id="totalProjects">0</strong>
+          <small id="activeProjects">0 ativos</small>
+        </article>
+        <article class="metric-card">
+          <span>Ativos</span>
+          <strong id="totalAssets">0</strong>
+          <small id="assetCoverage">0% vinculados</small>
+        </article>
+        <article class="metric-card">
+          <span>Relacionamentos</span>
+          <strong id="totalRelationships">0</strong>
+          <small id="impactLabel">Impacto direto</small>
+        </article>
+      </section>
+
+      <section class="workbench">
+        <div class="panel inventory-panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Inventario</p>
+              <h2>Catalogo operacional</h2>
+            </div>
+            <div class="segmented-control" role="tablist" aria-label="Filtro de inventario">
+              <button class="segment active" type="button" data-filter="all">Todos</button>
+              <button class="segment" type="button" data-filter="assets">Ativos</button>
+              <button class="segment" type="button" data-filter="workflows">Fluxos</button>
+              <button class="segment" type="button" data-filter="agents">Agentes</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tipo</th>
+                  <th>Nome</th>
+                  <th>Status</th>
+                  <th>Dono</th>
+                </tr>
+              </thead>
+              <tbody id="inventoryRows">
+                <tr>
+                  <td colspan="5">Carregando inventario...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="side-stack">
+          <section class="panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow">Busca</p>
+                <h2>Pesquisa global</h2>
+              </div>
+            </div>
+            <form id="searchForm" class="inline-form">
+              <input id="searchInput" type="search" name="q" placeholder="ID, nome, status ou tecnologia" autocomplete="off">
+              <button type="submit" aria-label="Pesquisar">
+                <span aria-hidden="true">&#8981;</span>
+              </button>
+            </form>
+            <div id="searchResults" class="result-list">
+              <p class="empty-state">Digite um termo para consultar o catalogo.</p>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header compact">
+              <div>
+                <p class="eyebrow">Impacto</p>
+                <h2>Dependencias diretas</h2>
+              </div>
+            </div>
+            <form id="impactForm" class="inline-form">
+              <input id="impactInput" type="text" name="asset_id" value="ASSET-0001" autocomplete="off">
+              <button type="submit" aria-label="Analisar impacto">
+                <span aria-hidden="true">&#8599;</span>
+              </button>
+            </form>
+            <div id="impactResults" class="impact-box">
+              <p class="empty-state">Informe um ativo para ver dependencias e dependentes.</p>
+            </div>
+          </section>
+        </aside>
+      </section>
+
+      <section class="panel relationship-panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Grafo</p>
+            <h2>Relacionamentos recentes</h2>
+          </div>
+          <span id="relationshipCount" class="mini-stat">0 relacoes</span>
+        </div>
+        <div id="relationshipRail" class="relationship-rail">
+          <p class="empty-state">Carregando relacionamentos...</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="/dashboard-assets/dashboard.js" defer></script>
+  </body>
+</html>
