@@ -21,6 +21,10 @@ O Engineering OS organiza projetos, APIs, agentes, workflows, componentes, promp
 | Stack principal | FastAPI, SQLAlchemy, Pydantic, MariaDB |
 | Repositorio | `github.com/Paula-Tech007/engineering-os` |
 
+## Preview do Dashboard
+
+![Engineering OS Dashboard Cyberpunk](docs/assets/dashboard-cyberpunk.png)
+
 ## O Que o MVP Entrega
 
 - API FastAPI para governanca, catalogo, inventario e descoberta de ativos.
